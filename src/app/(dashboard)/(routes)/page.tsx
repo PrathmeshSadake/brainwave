@@ -1,191 +1,22 @@
+import DetailsDialog from "@/components/details-dialog";
+import HistoryCard from "@/components/history-card";
+import QuizMeCard from "@/components/quiz";
 import React from "react";
 
 const Home = () => {
   return (
-    <div className='h-screen'>
-      {/* <UserButton afterSignOutUrl='/' /> */}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>{" "}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        officia aliquam voluptas dolorem ratione delectus eaque architecto saepe
-        optio consectetur animi nulla laboriosam reprehenderit in aspernatur
-        esse a, nobis eum eius laudantium, nisi qui expedita incidunt libero.
-        Vitae sapiente, expedita quo minus nam, inventore modi ullam animi
-        dignissimos beatae quidem commodi maiores dolor eveniet impedit eum
-        doloremque harum qui quos illo. Ad tempora molestiae eum nesciunt
-        numquam exercitationem corporis voluptates soluta dolorem rem quidem
-        facere, maiores at odit ipsum iusto laudantium error, neque dolorum
-        aspernatur sint, expedita repellendus. Accusantium unde non nulla ipsa
-        labore perferendis inventore perspiciatis laudantium impedit doloremque!
-      </p>
+    <div>
+      <div className='flex items-center'>
+        <h2 className='mr-2 text-3xl font-semibold tracking-tight'>
+          Dashboard
+        </h2>
+        <DetailsDialog />
+      </div>
+
+      <div className='grid gap-4 mt-4 md:grid-cols-2'>
+        <QuizMeCard />
+        <HistoryCard />
+      </div>
     </div>
   );
 };
