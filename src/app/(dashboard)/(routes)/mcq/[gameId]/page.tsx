@@ -1,6 +1,4 @@
 import MCQ from "@/components/mcq";
-import { prisma } from "@/lib/db";
-import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -11,25 +9,13 @@ type Props = {
 };
 
 const MCQPage = async ({ params: { gameId } }: Props) => {
-  const user = await currentUser();
+  // authenticated user
+  const user = {};
   if (!user) {
     return redirect("/");
   }
-
-  const game = await prisma.game.findUnique({
-    where: {
-      id: gameId,
-    },
-    include: {
-      questions: {
-        select: {
-          id: true,
-          question: true,
-          options: true,
-        },
-      },
-    },
-  });
+  // find unique game based on user id along with questions included
+  const game = {};
   if (!game) {
     return redirect("/quiz");
   }

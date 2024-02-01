@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs";
 
-import { prisma } from "@/lib/db";
 import { buttonVariants } from "@/components/ui/button";
 import { Clock, CopyCheck, LucideLayoutDashboard } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,16 +8,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 type Props = {};
 
 const History = async (props: Props) => {
-  const user = await currentUser();
-  const games = await prisma.game.findMany({
-    take: 10,
-    where: {
-      userId: user?.id,
-    },
-    orderBy: {
-      timeStarted: "desc",
-    },
-  });
+  // authenticated user
+  const user = {};
+  // get user's games from database
+  const games: any[] = [];
+  
   return (
     <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[400px]'>
       <Card>

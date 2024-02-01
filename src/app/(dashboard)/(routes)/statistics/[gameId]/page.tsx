@@ -1,5 +1,4 @@
 import { buttonVariants } from "@/components/ui/button";
-import { prisma } from "@/lib/db";
 
 import { LucideLayoutDashboard } from "lucide-react";
 import Link from "next/link";
@@ -18,10 +17,13 @@ type Props = {
 };
 
 const Statistics = async ({ params: { gameId } }: Props) => {
-  const game = await prisma.game.findUnique({
-    where: { id: gameId },
-    include: { questions: true },
-  });
+  // unique game where: { id: gameId },
+  // include: { questions: true },
+  const game = {
+    questions: [{ isCorrect: true }],
+    timeEnded: 0,
+    timeStarted: 0,
+  };
   if (!game) {
     return redirect("/");
   }
