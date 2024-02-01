@@ -51,7 +51,7 @@ const Statistics = async ({ params: { gameId } }: Props) => {
           </div>
         </div>
 
-        <div className='grid gap-4 mt-4 md:grid-cols-7'>
+        {/* <div className='grid gap-4 mt-4 md:grid-cols-7'>
           <ResultsCard accuracy={accuracy} />
           <AccuracyCard accuracy={accuracy} />
           <TimeTakenCard
@@ -59,7 +59,10 @@ const Statistics = async ({ params: { gameId } }: Props) => {
             timeStarted={new Date(game.timeStarted ?? 0)}
           />
         </div>
-        <QuestionsList questions={game.questions} />
+        <QuestionsList questions={game.questions} /> */}
+        <div>
+          
+        </div>
       </div>
     </>
   );

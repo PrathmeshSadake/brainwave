@@ -138,7 +138,8 @@ const MCQ = ({ game }: { game: any }) => {
           {/* {formatTimeDelta(differenceInSeconds(now, game.timeStarted))} */}
         </div>
         <Link
-          href={`/statistics/${game.id}`}
+          // href={`/statistics/${game.id}`}
+          href={`/statistics`}
           className={cn(buttonVariants({ size: "lg" }), "mt-2")}
         >
           View Statistics
