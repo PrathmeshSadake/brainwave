@@ -10,19 +10,28 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import Image from "next/image";
 import Link from "next/link";
-import { User2 } from "lucide-react";
-import { SignOutButton, useClerk, useUser } from "@clerk/nextjs";
+import { LayoutDashboard, User2 } from "lucide-react";
+import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const UserAccountNav = () => {
-  const { signOut } = useClerk();
-  const { user } = useUser();
+const UserAccountNav = ({ user }: { user: User }) => {
   const router = useRouter();
+  const supabase = createClientComponentClient();
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.log({ error });
+    } else {
+      return router.refresh();
+    }
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className='overflow-visible'>
         <Button className='rounded-full h-8 w-8 aspect-square bg-slate-400'>
-          <Avatar className='relative w-8 h-8'>
+          {/* <Avatar className='relative w-8 h-8'>
             {user?.imageUrl ? (
               <div className='relative aspect-square h-full w-full'>
                 <Image
@@ -38,19 +47,19 @@ const UserAccountNav = () => {
                 <User2 className='h-4 w-4 text-zinc-900' />
               </AvatarFallback>
             )}
-          </Avatar>
+          </Avatar> */}
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className='bg-white my-4' align='end'>
         <div className='flex items-center justify-start gap-2 p-2'>
           <div className='flex flex-col space-y-0.5 leading-none'>
-            {user?.fullName && (
+            {/* {user?.fullName && (
               <p className='font-medium text-sm text-black'>{user?.fullName}</p>
-            )}
-            {user?.emailAddresses && (
+            )} */}
+            {user?.email && (
               <p className='w-[200px] truncate text-xs text-zinc-700'>
-                {user?.emailAddresses[0].emailAddress}
+                {user?.email}
               </p>
             )}
           </div>
@@ -59,12 +68,13 @@ const UserAccountNav = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild className='cursor-pointer'>
-          <Link href='/dashboard'>Dashboard</Link>
+          <Link href='/'>Dashboard</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className='cursor-pointer'>
-          <SignOutButton
-            signOutCallback={() => signOut().then(() => router.replace("/"))}
-          />
+        <DropdownMenuItem asChild className='cursor-pointer'>
+          <Link href='/profile'>My Profile</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild className='cursor-pointer'>
+          <p onClick={handleLogout}>Logout</p>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

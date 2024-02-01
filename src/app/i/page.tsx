@@ -18,9 +18,9 @@ export default async function Home() {
     <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
       <Card className='w-[350px]'>
         <CardHeader>
-          <CardTitle className='text-center'>Welcome to Brainwave</CardTitle>
+          <CardTitle className='text-center'>Welcome to Quizmify</CardTitle>
           <CardDescription className='text-center pt-2'>
-            Brainwave is a platform for creating quizzes using AI.{" "}
+            Quizmify is a platform for creating quizzes using AI.{" "}
           </CardDescription>
         </CardHeader>
         <div className='flex justify-center pb-4'>

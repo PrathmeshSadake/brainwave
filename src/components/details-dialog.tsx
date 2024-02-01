@@ -19,11 +19,11 @@ const DetailsDialog = () => {
       </DialogTrigger>
       <DialogContent className='w-[70vw] max-w-[100vw] md:w-[50vw]'>
         <DialogHeader>
-          <DialogTitle className='text-2xl'>Welcome to Brainwave!</DialogTitle>
+          <DialogTitle className='text-2xl'>Welcome to Quizmify!</DialogTitle>
           <DialogDescription>
             <p className='my-2 mt-4 '>
               Are you tired of mundane and repetitive quizzes? Say goodbye to
-              the ordinary and embrace the extraordinary with Brainwave! Our
+              the ordinary and embrace the extraordinary with Quizmify! Our
               platform is revolutionizing the quiz and trivia experience by
               harnessing the immense potential of artificial intelligence.
             </p>

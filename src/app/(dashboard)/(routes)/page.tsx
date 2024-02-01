@@ -5,8 +5,6 @@ import MCQ from "@/components/mcq";
 import QuizMeCard from "@/components/quiz";
 
 const Home = async () => {
-  const data = await getQuestions();
-  console.log(data);
   return (
     <div>
       <div className='flex items-center'>
@@ -17,15 +15,8 @@ const Home = async () => {
       </div>
 
       <div className='grid gap-4 mt-4 md:grid-cols-2'>
-        {/* <QuizMeCard />
-        <HistoryCard /> */}
-        <MCQ
-          game={{
-            questions: data,
-            topic: "Initial Assessment",
-            id: "Initial Assessment",
-          }}
-        />
+        <QuizMeCard />
+        <HistoryCard />
       </div>
     </div>
   );

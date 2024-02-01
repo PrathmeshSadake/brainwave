@@ -11,13 +11,20 @@ import {
 import { getURL } from "@/lib/utils";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export default function AuthUI() {
   const { supabase } = useSupabase();
+
   return (
     <Card className='w-full m-auto py-4'>
       <CardHeader>
-        <CardTitle>Sign in to Brainwave</CardTitle>
+        <CardTitle>Sign in to Quizmify</CardTitle>
         <CardDescription>
           Securely sign in to your account to access personalized features.
         </CardDescription>
@@ -27,14 +34,27 @@ export default function AuthUI() {
           supabaseClient={supabase}
           providers={["google"]}
           redirectTo={`${getURL()}/auth/callback`}
-          // magicLink={true}
           appearance={{
             theme: ThemeSupa,
+            style: {
+              button: {
+                fontFamily: poppins.style.fontFamily,
+              },
+              label: {
+                fontFamily: poppins.style.fontFamily,
+              },
+              input: {
+                fontFamily: poppins.style.fontFamily,
+              },
+              anchor: {
+                fontFamily: poppins.style.fontFamily,
+              },
+            },
             variables: {
               default: {
                 colors: {
-                  brand: "#3D72ED",
-                  brandAccent: "#3D72ED",
+                  brand: "black",
+                  brandAccent: "black",
                 },
               },
             },

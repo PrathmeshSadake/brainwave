@@ -8,9 +8,9 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-
+poppins.style.fontFamily
 export const metadata: Metadata = {
-  title: "Brainwave",
+  title: "Quizmify",
   description: "AI powered quiz app",
 };
 

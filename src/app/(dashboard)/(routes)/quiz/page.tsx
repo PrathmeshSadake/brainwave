@@ -1,6 +1,6 @@
 import QuizCreation from "@/components/quiz-creation";
 export const metadata = {
-  title: "Brainwave",
+  title: "Quizmify",
   description: "Quiz yourself on anything!",
 };
 
