@@ -8,9 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getSession } from "../supabase-server";
 
 export default async function Home() {
-  const user = {};
+  const session = await getSession();
+  const user = session?.user;
+
   return (
     <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
       <Card className='w-[350px]'>
@@ -22,14 +25,14 @@ export default async function Home() {
         </CardHeader>
         <div className='flex justify-center pb-4'>
           {user ? (
-            <Button asChild variant={"outline"}>
+            <Button asChild>
               <Link href={"/"}>
                 Continue to dashboard <MoveRight className='ml-2' />
               </Link>
             </Button>
           ) : (
             <Button asChild variant={"outline"}>
-              <Link href={"/sign-in"}>Sign In with Google</Link>
+              <Link href={"/signin"}>Sign In</Link>
             </Button>
           )}
         </div>

@@ -2,12 +2,15 @@ import React from "react";
 import Sidebar from "./_components/sidebar";
 import Navbar from "./_components/navbar";
 import { redirect } from "next/navigation";
+import { getSession } from "../supabase-server";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const user = {};
+const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getSession();
+  const user = session?.user;
   if (!user) {
     return redirect("/i");
   }
+
   return (
     <div className='h-full'>
       <div className='h-[60px] md:pl-56 fixed inset-y-0 w-full z-50'>

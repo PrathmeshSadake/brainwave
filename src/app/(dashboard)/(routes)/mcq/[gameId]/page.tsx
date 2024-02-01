@@ -9,11 +9,6 @@ type Props = {
 };
 
 const MCQPage = async ({ params: { gameId } }: Props) => {
-  // authenticated user
-  const user = {};
-  if (!user) {
-    return redirect("/");
-  }
   // find unique game based on user id along with questions included
   const game = {};
   if (!game) {
