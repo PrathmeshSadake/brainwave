@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import SupabaseProvider from "./supabase-provider";
 import "./globals.css";
+import Providers from "@/components/providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,8 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={poppins.className}>{children}</body>
-    </html>
+    <SupabaseProvider>
+      <Providers>
+        <html lang='en'>
+          <body className={poppins.className}>{children}</body>
+        </html>
+      </Providers>
+    </SupabaseProvider>
   );
 }

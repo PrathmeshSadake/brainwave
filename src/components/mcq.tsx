@@ -1,5 +1,4 @@
 "use client";
-import { Game, Question } from "@prisma/client";
 import React from "react";
 import {
   Card,
@@ -19,11 +18,12 @@ import axios from "axios";
 import { z } from "zod";
 import { useToast } from "./ui/use-toast";
 
-type Props = {
-  game: Game & { questions: Pick<Question, "id" | "options" | "question">[] };
+type Option = {
+  text: string;
+  correct: string;
 };
 
-const MCQ = ({ game }: Props) => {
+const MCQ = ({ game }: { game: any }) => {
   const [questionIndex, setQuestionIndex] = React.useState(0);
   const [hasEnded, setHasEnded] = React.useState(false);
   const [stats, setStats] = React.useState({
@@ -40,30 +40,26 @@ const MCQ = ({ game }: Props) => {
   const options = React.useMemo(() => {
     if (!currentQuestion) return [];
     if (!currentQuestion.options) return [];
-    return JSON.parse(currentQuestion.options as string) as string[];
+    return JSON.parse(currentQuestion.options) as Option[];
   }, [currentQuestion]);
 
-  const { toast } = useToast();
-  const { mutate: checkAnswer, isPending: isChecking } = useMutation({
-    mutationFn: async () => {
-      const payload: z.infer<typeof checkAnswerSchema> = {
-        questionId: currentQuestion.id,
-        userInput: options[selectedChoice],
-      };
-      const response = await axios.post(`/api/check-answer`, payload);
-      return response.data;
-    },
-  });
+  console.log(options);
 
-  const { mutate: endGame } = useMutation({
-    mutationFn: async () => {
-      const payload: z.infer<typeof endGameSchema> = {
-        gameId: game.id,
-      };
-      const response = await axios.post(`/api/endGame`, payload);
-      return response.data;
-    },
-  });
+  const { toast } = useToast();
+
+  // const { mutate: endGame } = useMutation({
+  //   mutationFn: async () => {
+  //     const payload: z.infer<typeof endGameSchema> = {
+  //       gameId: game.id,
+  //     };
+  //     const response = await axios.post(`/api/endGame`, payload);
+  //     return response.data;
+  //   },
+  // });
+
+  const endGame = () => {
+    console.log("Game Ended");
+  };
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -74,37 +70,40 @@ const MCQ = ({ game }: Props) => {
     return () => clearInterval(interval);
   }, [hasEnded]);
 
+  const checkAnswer = () => {
+    const isCorrect = options[selectedChoice].correct === "true";
+    return isCorrect;
+  };
+
   const handleNext = React.useCallback(() => {
-    checkAnswer(undefined, {
-      onSuccess: ({ isCorrect }) => {
-        if (isCorrect) {
-          setStats((stats) => ({
-            ...stats,
-            correct_answers: stats.correct_answers + 1,
-          }));
-          toast({
-            title: "Correct",
-            description: "You got it right!",
-          });
-        } else {
-          setStats((stats) => ({
-            ...stats,
-            wrong_answers: stats.wrong_answers + 1,
-          }));
-          toast({
-            title: "Incorrect",
-            description: "You got it wrong!",
-            variant: "destructive",
-          });
-        }
-        if (questionIndex === game.questions.length - 1) {
-          endGame();
-          setHasEnded(true);
-          return;
-        }
-        setQuestionIndex((questionIndex) => questionIndex + 1);
-      },
-    });
+    const isCorrect = checkAnswer();
+
+    if (isCorrect) {
+      setStats((stats) => ({
+        ...stats,
+        correct_answers: stats.correct_answers + 1,
+      }));
+      toast({
+        title: "Correct",
+        description: "You got it right!",
+      });
+    } else {
+      setStats((stats) => ({
+        ...stats,
+        wrong_answers: stats.wrong_answers + 1,
+      }));
+      toast({
+        title: "Incorrect",
+        description: "You got it wrong!",
+        variant: "destructive",
+      });
+    }
+    if (questionIndex === game.questions.length - 1) {
+      endGame();
+      setHasEnded(true);
+      return;
+    }
+    setQuestionIndex((questionIndex) => questionIndex + 1);
   }, [checkAnswer, questionIndex, game.questions.length, toast, endGame]);
 
   React.useEffect(() => {
@@ -150,20 +149,22 @@ const MCQ = ({ game }: Props) => {
   }
 
   return (
-    <div className='absolute -translate-x-1/2 -translate-y-1/2 md:w-[80vw] max-w-4xl w-[90vw] top-1/2 left-1/2'>
+    <div className='md:w-[80vw] w-[90vw]'>
       <div className='flex flex-row justify-between'>
         <div className='flex flex-col'>
           {/* topic */}
           <p>
-            <span className='text-slate-400'>Topic</span> &nbsp;
-            <span className='px-2 py-1 text-white rounded-lg bg-slate-800'>
+            {game.topic !== "Initial Assessment" && (
+              <span className='text-slate-400'>Topic &nbsp;</span>
+            )}
+            <span className='px-2 py-1 text-blue-600 rounded-lg border border-blue-600'>
               {game.topic}
             </span>
           </p>
-          <div className='flex self-start mt-3 text-slate-400'>
+          {/* <div className='flex self-start mt-3 text-slate-400'>
             <Timer className='mr-2' />
-            {/* {formatTimeDelta(differenceInSeconds(now, game.timeStarted))} */}
-          </div>
+            {formatTimeDelta(differenceInSeconds(now, game.timeStarted))}
+          </div> */}
         </div>
         <MCQCounter
           correct_answers={stats.correct_answers}
@@ -187,7 +188,7 @@ const MCQ = ({ game }: Props) => {
         {options.map((option, index) => {
           return (
             <Button
-              key={option}
+              key={option.text}
               variant={selectedChoice === index ? "default" : "outline"}
               className='justify-start w-full py-8 mb-4'
               onClick={() => setSelectedChoice(index)}
@@ -196,7 +197,7 @@ const MCQ = ({ game }: Props) => {
                 <div className='p-2 px-3 mr-5 border rounded-md'>
                   {index + 1}
                 </div>
-                <div className='text-start'>{option}</div>
+                <div className='text-start'>{option.text}</div>
               </div>
             </Button>
           );
@@ -205,12 +206,11 @@ const MCQ = ({ game }: Props) => {
           variant='default'
           className='mt-2'
           size='lg'
-          disabled={isChecking || hasEnded}
+          disabled={hasEnded}
           onClick={() => {
             handleNext();
           }}
         >
-          {isChecking && <Loader2 className='w-4 h-4 mr-2 animate-spin' />}
           Next <ChevronRight className='w-4 h-4 ml-2' />
         </Button>
       </div>

@@ -1,9 +1,12 @@
+import { getQuestions } from "@/app/supabase-server";
 import DetailsDialog from "@/components/details-dialog";
 import HistoryCard from "@/components/history-card";
+import MCQ from "@/components/mcq";
 import QuizMeCard from "@/components/quiz";
-import React from "react";
 
-const Home = () => {
+const Home = async () => {
+  const data = await getQuestions();
+  console.log(data);
   return (
     <div>
       <div className='flex items-center'>
@@ -14,8 +17,15 @@ const Home = () => {
       </div>
 
       <div className='grid gap-4 mt-4 md:grid-cols-2'>
-        <QuizMeCard />
-        <HistoryCard />
+        {/* <QuizMeCard />
+        <HistoryCard /> */}
+        <MCQ
+          game={{
+            questions: data,
+            topic: "Initial Assessment",
+            id: "Initial Assessment",
+          }}
+        />
       </div>
     </div>
   );
