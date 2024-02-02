@@ -31,7 +31,7 @@ const UserAccountNav = ({ user }: { user: User }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild className='overflow-visible'>
         <Button className='rounded-full h-8 w-8 aspect-square bg-slate-400'>
-          {/* <Avatar className='relative w-8 h-8'>
+          <Avatar className='relative w-8 h-8'>
             {user?.imageUrl ? (
               <div className='relative aspect-square h-full w-full'>
                 <Image
@@ -43,11 +43,11 @@ const UserAccountNav = ({ user }: { user: User }) => {
               </div>
             ) : (
               <AvatarFallback>
-                <span className='sr-only'>{`${user?.fullName}`}</span>
+                {/* <span className='sr-only'>{`${user?.fullName}`}</span> */}
                 <User2 className='h-4 w-4 text-zinc-900' />
               </AvatarFallback>
             )}
-          </Avatar> */}
+          </Avatar>
         </Button>
       </DropdownMenuTrigger>
 

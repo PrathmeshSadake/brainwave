@@ -1,18 +1,8 @@
-import { getQuestions } from "@/app/supabase-server";
-import MCQ from "@/components/mcq";
+import InitialAssessmentCreationCard from "@/components/initial-assessment-creation";
+import React from "react";
 
-const page = async () => {
-  const data = await getQuestions();
-
-  return (
-    <MCQ
-      game={{
-        questions: data,
-        topic: "Initial Assessment",
-        id: "Initial Assessment",
-      }}
-    />
-  );
+const page = () => {
+  return <InitialAssessmentCreationCard />;
 };
 
 export default page;

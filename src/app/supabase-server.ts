@@ -77,6 +77,28 @@ export const getQuestions = async () => {
   );
 };
 
+export const getInitialAssessmentStats = async () => {
+  const supabase = createServerSupabaseClient();
+  try {
+    const session = await getSession();
+    const user = session?.user;
+    let { data, error } = await supabase
+      .from("initial_assessments")
+      .select("*")
+      .eq("user_id", user?.id)
+      .limit(1);
+
+    if ((data?.length ?? 0) > 0) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
+  }
+};
+
 // export const userAssessmentStatus = async () => {
 //   const supabase = createServerSupabaseClient();
 //   const {
