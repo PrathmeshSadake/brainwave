@@ -87,23 +87,23 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
   }
 
   return (
-    <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+    <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
       <Card>
         <CardHeader>
-          <CardTitle className='text-2xl font-bold'>Quiz Creation</CardTitle>
+          <CardTitle className="text-2xl font-bold">Quiz Creation</CardTitle>
           <CardDescription>Choose a topic</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name='topic'
+                name="topic"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Topic</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter a topic' {...field} />
+                      <Input placeholder="Enter a topic" {...field} />
                     </FormControl>
                     <FormDescription>
                       Please provide any topic you would like to be quizzed on
@@ -115,14 +115,14 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
               />
               <FormField
                 control={form.control}
-                name='amount'
+                name="amount"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Number of Questions</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='How many questions?'
-                        type='number'
+                        placeholder="How many questions?"
+                        type="number"
                         {...field}
                         onChange={(e) => {
                           form.setValue("amount", parseInt(e.target.value));
@@ -140,7 +140,7 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
                 )}
               />
 
-              <Button disabled={isPending} type='submit'>
+              <Button disabled={isPending} type="submit">
                 Submit
               </Button>
             </form>

@@ -17,6 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { z } from "zod";
 import { useToast } from "./ui/use-toast";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type Option = {
   text: string;
@@ -43,7 +44,7 @@ const MCQ = ({ game }: { game: any }) => {
     return JSON.parse(currentQuestion.options) as Option[];
   }, [currentQuestion]);
 
-  console.log(options);
+  // console.log(options);
 
   const { toast } = useToast();
 
@@ -57,8 +58,37 @@ const MCQ = ({ game }: { game: any }) => {
   //   },
   // });
 
-  const endGame = () => {
+  const endGame = async () => {
     console.log("Game Ended");
+    console.table(stats);
+    const supabase = createClientComponentClient();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const { data: assessment_data, error } = await supabase
+      .from("initial_assessments")
+      .insert({
+        user_id: session?.user?.id,
+        topic: game.topic,
+        correct_answers: stats.correct_answers,
+        wrong_answers: stats.wrong_answers,
+        total_questions: game.questions.length,
+      })
+      .select();
+
+    if (error) {
+      console.error(error);
+    }
+    if (assessment_data?.length! > 0) {
+      const { data, error } = await supabase
+        .from("profiles")
+        .update({
+          initial_assessment_status: true,
+        })
+        .eq("id", session?.user?.id)
+        .single();
+    }
+    console.log(assessment_data);
   };
 
   React.useEffect(() => {
@@ -132,8 +162,8 @@ const MCQ = ({ game }: { game: any }) => {
 
   if (hasEnded) {
     return (
-      <div className='absolute flex flex-col justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
-        <div className='px-4 py-2 mt-2 font-semibold text-white bg-green-500 rounded-md whitespace-nowrap'>
+      <div className="absolute flex flex-col justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        <div className="px-4 py-2 mt-2 font-semibold text-white bg-green-500 rounded-md whitespace-nowrap">
           You Completed in{" "}
           {/* {formatTimeDelta(differenceInSeconds(now, game.timeStarted))} */}
         </div>
@@ -143,22 +173,22 @@ const MCQ = ({ game }: { game: any }) => {
           className={cn(buttonVariants({ size: "lg" }), "mt-2")}
         >
           View Statistics
-          <BarChart className='w-4 h-4 ml-2' />
+          <BarChart className="w-4 h-4 ml-2" />
         </Link>
       </div>
     );
   }
 
   return (
-    <div className='md:w-[80vw] w-[90vw]'>
-      <div className='flex flex-row justify-between'>
-        <div className='flex flex-col'>
+    <div className="md:w-[80vw] w-[90vw]">
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-col">
           {/* topic */}
           <p>
             {game.topic !== "Initial Assessment" && (
-              <span className='text-slate-400'>Topic &nbsp;</span>
+              <span className="text-slate-400">Topic &nbsp;</span>
             )}
-            <span className='px-2 py-1 text-zinc-600 rounded-lg border border-zinc-600'>
+            <span className="px-2 py-1 text-zinc-600 rounded-lg border border-zinc-600">
               {game.topic}
             </span>
           </p>
@@ -172,47 +202,47 @@ const MCQ = ({ game }: { game: any }) => {
           wrong_answers={stats.wrong_answers}
         />
       </div>
-      <Card className='w-full mt-4'>
-        <CardHeader className='flex flex-row items-center'>
-          <CardTitle className='mr-5 text-center divide-y divide-zinc-600/50'>
+      <Card className="w-full mt-4">
+        <CardHeader className="flex flex-row items-center">
+          <CardTitle className="mr-5 text-center divide-y divide-zinc-600/50">
             <div>{questionIndex + 1}</div>
-            <div className='text-base text-slate-400'>
+            <div className="text-base text-slate-400">
               {game.questions.length}
             </div>
           </CardTitle>
-          <CardDescription className='flex-grow text-lg'>
+          <CardDescription className="flex-grow text-lg">
             {currentQuestion?.question}
           </CardDescription>
         </CardHeader>
       </Card>
-      <div className='flex flex-col items-center justify-center w-full mt-4'>
+      <div className="flex flex-col items-center justify-center w-full mt-4">
         {options.map((option, index) => {
           return (
             <Button
               key={option.text}
               variant={selectedChoice === index ? "default" : "outline"}
-              className='justify-start w-full py-8 mb-4'
+              className="justify-start w-full py-8 mb-4"
               onClick={() => setSelectedChoice(index)}
             >
-              <div className='flex items-center justify-start'>
-                <div className='p-2 px-3 mr-5 border rounded-md'>
+              <div className="flex items-center justify-start">
+                <div className="p-2 px-3 mr-5 border rounded-md">
                   {index + 1}
                 </div>
-                <div className='text-start'>{option.text}</div>
+                <div className="text-start">{option.text}</div>
               </div>
             </Button>
           );
         })}
         <Button
-          variant='default'
-          className='mt-2'
-          size='lg'
+          variant="default"
+          className="mt-2"
+          size="lg"
           disabled={hasEnded}
           onClick={() => {
             handleNext();
           }}
         >
-          Next <ChevronRight className='w-4 h-4 ml-2' />
+          Next <ChevronRight className="w-4 h-4 ml-2" />
         </Button>
       </div>
     </div>

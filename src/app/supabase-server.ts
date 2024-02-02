@@ -76,3 +76,19 @@ export const getQuestions = async () => {
     [...(level1 ?? []), ...(level2 ?? []), ...(level3 ?? [])] ?? []
   );
 };
+
+// export const userAssessmentStatus = async () => {
+//   const supabase = createServerSupabaseClient();
+//   const {
+//     data: { session },
+//   } = await supabase.auth.getSession();
+//   const { data, error } = await supabase
+//     .from("profiles")
+//     .select("*")
+//     .eq("id", session?.user?.id)
+//     .single();
+//   if (error) {
+//     console.error(error);
+//   }
+//   return data;
+// };
