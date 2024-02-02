@@ -158,7 +158,7 @@ const MCQ = ({ game }: { game: any }) => {
             {game.topic !== "Initial Assessment" && (
               <span className='text-slate-400'>Topic &nbsp;</span>
             )}
-            <span className='px-2 py-1 text-blue-600 rounded-lg border border-blue-600'>
+            <span className='px-2 py-1 text-zinc-600 rounded-lg border border-zinc-600'>
               {game.topic}
             </span>
           </p>
