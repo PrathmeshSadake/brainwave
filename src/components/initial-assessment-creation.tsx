@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -32,6 +31,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export const quizCreationSchema = z.object({
   topic: z
@@ -47,7 +47,11 @@ export const quizCreationSchema = z.object({
 
 type Input = z.infer<typeof quizCreationSchema>;
 
-function InitialAssessmentCreationCard() {
+function InitialAssessmentCreationCard({
+  QuestionList,
+}: {
+  QuestionList: any;
+}) {
   const router = useRouter();
   const [showLoader, setShowLoader] = React.useState(false);
   const [finishedLoading, setFinishedLoading] = React.useState(false);
@@ -60,36 +64,53 @@ function InitialAssessmentCreationCard() {
   });
 
   const onSubmit = async (data: Input) => {
-    console.log(data);
-    router.push(`/initial-assessment/${data.topic}`);
+    const supabase = createClientComponentClient();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const { data: assessment_data, error } = await supabase
+      .from("quiz")
+      .insert({
+        userId: session?.user?.id,
+        topic: QuestionList?.[0].metadata.topic,
+        questions: QuestionList,
+      })
+      .select();
+
+    if (error) {
+      console.error(error);
+    }
+    if (assessment_data && assessment_data.length > 0) {
+      router.push(`/initial-assessment/${assessment_data[0].id}`);
+    }
   };
   form.watch();
 
   return (
-    <Card className='w-full max-w-3xl mx-auto'>
+    <Card className="w-full max-w-3xl mx-auto">
       <CardHeader>
         <CardTitle>Initial assessment</CardTitle>
         <CardDescription>
           his helps us tailor the quiz questions to your comfort level.
         </CardDescription>
       </CardHeader>
-      <CardContent className='grid gap-6'>
+      <CardContent className="grid gap-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name='topic'
+              name="topic"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Topic</FormLabel>
                   <FormControl>
-                    <Select defaultValue='integers'>
-                      <SelectTrigger id='area'>
-                        <SelectValue placeholder='Select' {...field} />
+                    <Select defaultValue="integers">
+                      <SelectTrigger id="area">
+                        <SelectValue placeholder="Select" {...field} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value='trignometry'>Trignometry</SelectItem>
-                        <SelectItem value='integers'>Integers</SelectItem>
+                        <SelectItem value="trignometry">Trignometry</SelectItem>
+                        <SelectItem value="integers">Integers</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -103,14 +124,14 @@ function InitialAssessmentCreationCard() {
             />
             <FormField
               control={form.control}
-              name='amount'
+              name="amount"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Number of Questions</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='How many questions?'
-                      type='number'
+                      placeholder="How many questions?"
+                      type="number"
                       {...field}
                       onChange={(e) => {
                         form.setValue("amount", parseInt(e.target.value));
@@ -128,11 +149,11 @@ function InitialAssessmentCreationCard() {
               )}
             />
 
-            <div className='w-full flex justify-between space-x-2 md:space-x-8'>
-              <Button className='w-full' variant='outline'>
+            <div className="w-full flex justify-between space-x-2 md:space-x-8">
+              <Button className="w-full" variant="outline">
                 Cancel
               </Button>
-              <Button type='submit' className='w-full'>
+              <Button type="submit" className="w-full">
                 Submit
               </Button>
             </div>
