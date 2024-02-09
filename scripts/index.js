@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import "dotenv/config";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 // Function to generate feedback for the user's answer using OpenAI API
