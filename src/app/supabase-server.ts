@@ -136,3 +136,25 @@ export const getQuizById = async (id: any) => {
 //   }
 //   return data;
 // };
+
+export const getAdaptiveQuiz = async (id: any) => {
+  const supabase = createServerSupabaseClient();
+  try {
+    const session = await getSession();
+    const user = session?.user;
+    let { data, error } = await supabase
+      .from("adaptive_quiz")
+      .select("*")
+      .eq("id", id)
+      .limit(1);
+
+    if (data && data?.length > 0) {
+      return { success: true, data: data[0] };
+    } else {
+      return { success: false, data: null };
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return { success: false, data: null };
+  }
+};

@@ -1,4 +1,5 @@
 import { getQuestions, getSession } from "@/app/supabase-server";
+import AdaptiveQuizCard from "@/components/adaptive-quiz-card";
 import DetailsDialog from "@/components/details-dialog";
 import HistoryCard from "@/components/history-card";
 import InitialAssessmentCard from "@/components/initial-assessment-card";
@@ -17,18 +18,19 @@ const Home = async () => {
 
   return (
     <div>
-      <div className='flex items-center'>
-        <h2 className='mr-2 text-3xl font-semibold tracking-tight'>
+      <div className="flex items-center">
+        <h2 className="mr-2 text-3xl font-semibold tracking-tight">
           Dashboard
         </h2>
         <DetailsDialog />
       </div>
-      <div className='grid gap-4 mt-4 md:grid-cols-2'>
+      <div className="grid gap-4 mt-4 md:grid-cols-2">
         <InitialAssessmentCard />
         <HistoryCard />
       </div>
-      <div className='grid gap-4 mt-4 md:grid-cols-1'>
+      <div className="grid gap-4 mt-4 md:grid-cols-1">
         <QuizMeCard />
+        <AdaptiveQuizCard />
         {/* <HistoryCard /> */}
       </div>
       <InitialAssessmentDialog />
