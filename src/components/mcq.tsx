@@ -50,15 +50,6 @@ const MCQ = ({ game }: { game: any }) => {
 
   const { toast } = useToast();
 
-  // const { mutate: endGame } = useMutation({
-  //   mutationFn: async () => {
-  //     const payload: z.infer<typeof endGameSchema> = {
-  //       gameId: game.id,
-  //     };
-  //     const response = await axios.post(`/api/endGame`, payload);
-  //     return response.data;
-  //   },
-  // });
 
   const endGame = async () => {
     const supabase = createClientComponentClient();
